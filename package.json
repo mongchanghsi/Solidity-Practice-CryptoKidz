@@ -2,6 +2,7 @@
   "scripts": {
     "start": "npx hardhat node",
     "test": "npx hardhat test",
+    "test:coverage": "npx hardhat coverage",
     "deploy:rinkeby": "npx hardhat run scripts/deploy.ts --network rinkeby",
     "deploy:goerli": "npx hardhat run scripts/deploy.ts --network goerli",
     "deploy:mainnet": "npx hardhat run scripts/deploy.ts --network mainnet",
@@ -15,6 +16,7 @@
     "@openzeppelin/test-helpers": "^0.5.16",
     "dotenv": "^16.3.1",
     "hardhat": "^2.19.1",
-    "hardhat-gas-reporter": "^1.0.9"
+    "hardhat-gas-reporter": "^1.0.9",
+    "solidity-coverage": "^0.8.5"
   }
 }

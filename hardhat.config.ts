@@ -1,5 +1,6 @@
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-gas-reporter";
+import "solidity-coverage";
 require("dotenv").config();
 
 const ALCHEMY_RINKEBY_API_KEY_URL =
