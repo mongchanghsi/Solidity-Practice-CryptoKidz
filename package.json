@@ -1,0 +1,20 @@
+{
+  "scripts": {
+    "start": "npx hardhat node",
+    "test": "npx hardhat test",
+    "deploy:rinkeby": "npx hardhat run scripts/deploy.ts --network rinkeby",
+    "deploy:goerli": "npx hardhat run scripts/deploy.ts --network goerli",
+    "deploy:mainnet": "npx hardhat run scripts/deploy.ts --network mainnet",
+    "verify:mainnet": "npx hardhat --network mainnet verify",
+    "verify:rinkeby": "npx hardhat --network rinkeby verify",
+    "verify:goerli": "npx hardhat --network goerli verify",
+    "new:wallet": "npx hardhat new:wallet"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^4.0.0",
+    "@openzeppelin/test-helpers": "^0.5.16",
+    "dotenv": "^16.3.1",
+    "hardhat": "^2.19.1",
+    "hardhat-gas-reporter": "^1.0.9"
+  }
+}
