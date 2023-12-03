@@ -52,18 +52,11 @@ describe("CryptoKidz", function () {
       const { cryptoKidz, account1, account2, RELEASE_TIME } =
         await loadFixture(deployFixture);
 
-      let _error: any;
-
-      try {
-        await cryptoKidz
+      await expect(
+        cryptoKidz
           .connect(account1)
-          .addKid(account2, "Test First Name", "Test Last Name", RELEASE_TIME);
-      } catch (error) {
-        _error = error;
-      }
-      expect(_error.message).to.includes(
-        "Only the owner can perform this action."
-      );
+          .addKid(account2, "Test First Name", "Test Last Name", RELEASE_TIME)
+      ).to.be.revertedWith("Only contract owner can call");
     });
   });
 
@@ -105,7 +98,7 @@ describe("CryptoKidz", function () {
       } catch (error) {
         _error = error;
       }
-      expect(_error.message).to.includes("CryptoKidz - Kid does not exist.");
+      expect(_error.message).to.includes("Kid does not exist");
     });
   });
 
@@ -131,14 +124,9 @@ describe("CryptoKidz", function () {
     it("Should throw error for kid does not exist", async () => {
       const { cryptoKidz, account1 } = await loadFixture(deployFixture);
 
-      let _error: any;
-
-      try {
-        await cryptoKidz.deposit(account1);
-      } catch (error) {
-        _error = error;
-      }
-      expect(_error.message).to.includes("CryptoKidz - Kid does not exist.");
+      await expect(cryptoKidz.deposit(account1)).to.be.revertedWith(
+        "Kid does not exist"
+      );
     });
   });
 
@@ -171,14 +159,9 @@ describe("CryptoKidz", function () {
     it("Should throw error for kid does not exist", async () => {
       const { cryptoKidz, account1 } = await loadFixture(deployFixture);
 
-      let _error: any;
-
-      try {
-        await cryptoKidz.withdraw(account1);
-      } catch (error) {
-        _error = error;
-      }
-      expect(_error.message).to.includes("CryptoKidz - Kid does not exist.");
+      await expect(cryptoKidz.withdraw(account1)).to.be.revertedWith(
+        "Kid does not exist"
+      );
     });
 
     it("Should be the kid himself to withdraw", async () => {
@@ -191,17 +174,9 @@ describe("CryptoKidz", function () {
         "Test Last Name",
         RELEASE_TIME
       );
-
-      let _error: any;
-
-      try {
-        // Still connected to the owner account
-        await cryptoKidz.withdraw(account1);
-      } catch (error) {
-        _error = error;
-      }
-      expect(_error.message).to.includes(
-        "CryptoKidz - You must be the owner of this account to withdraw."
+      // Still connected to the owner account
+      await expect(cryptoKidz.withdraw(account1)).to.be.revertedWith(
+        "Not the owner for this address"
       );
     });
 
@@ -216,16 +191,9 @@ describe("CryptoKidz", function () {
         RELEASE_TIME
       );
 
-      let _error: any;
-
-      try {
-        await cryptoKidz.connect(account1).withdraw(account1);
-      } catch (error) {
-        _error = error;
-      }
-      expect(_error.message).to.includes(
-        "CryptoKidz - Kid is unable to withdraw."
-      );
+      await expect(
+        cryptoKidz.connect(account1).withdraw(account1)
+      ).to.be.revertedWith("Kid is unable to withdraw");
     });
   });
 });

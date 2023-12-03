@@ -3,6 +3,9 @@
     "start": "npx hardhat node",
     "test": "npx hardhat test",
     "test:coverage": "npx hardhat coverage",
+    "typechain": "npx hardhat typechain",
+    "solhint": "solhint 'contracts/**/*.sol'",
+    "deploy:local": "npx hardhat run scripts/deploy.ts",
     "deploy:rinkeby": "npx hardhat run scripts/deploy.ts --network rinkeby",
     "deploy:goerli": "npx hardhat run scripts/deploy.ts --network goerli",
     "deploy:mainnet": "npx hardhat run scripts/deploy.ts --network mainnet",
@@ -17,6 +20,7 @@
     "dotenv": "^16.3.1",
     "hardhat": "^2.19.1",
     "hardhat-gas-reporter": "^1.0.9",
+    "solhint": "^4.0.0",
     "solidity-coverage": "^0.8.5"
   }
 }
