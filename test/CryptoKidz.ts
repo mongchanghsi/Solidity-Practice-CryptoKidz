@@ -23,12 +23,12 @@ describe("CryptoKidz", function () {
   describe("Deployment", () => {
     it("Should set the right owner", async () => {
       const { cryptoKidz, owner } = await loadFixture(deployFixture);
-      expect(await cryptoKidz.owner()).to.equal(owner.address);
+      expect(await cryptoKidz.getOwner()).to.equal(owner.address);
     });
 
     it("Should kids array have 1 default empty kid", async () => {
       const { cryptoKidz } = await loadFixture(deployFixture);
-      const _firstKid = await cryptoKidz.kids(0);
+      const _firstKid = await cryptoKidz.getKid(0);
       expect(_firstKid.firstName).to.equal("");
     });
   });
@@ -44,7 +44,7 @@ describe("CryptoKidz", function () {
         "Test Last Name",
         RELEASE_TIME
       );
-      const _secondKid = await cryptoKidz.kids(1);
+      const _secondKid = await cryptoKidz.getKid(1);
       expect(_secondKid.firstName).to.equal("Test First Name");
     });
 
@@ -117,7 +117,7 @@ describe("CryptoKidz", function () {
         cryptoKidz.connect(account1).deposit(account1, { value: ONE_GWEI })
       ).to.changeEtherBalances([cryptoKidz, account1], [ONE_GWEI, -ONE_GWEI]);
 
-      const _firstKid = await cryptoKidz.kids(1);
+      const _firstKid = await cryptoKidz.getKid(1);
       expect(_firstKid.amount).to.equal(ONE_GWEI);
     });
 
@@ -146,7 +146,7 @@ describe("CryptoKidz", function () {
         cryptoKidz.connect(account1).deposit(account1, { value: ONE_GWEI })
       ).to.changeEtherBalances([cryptoKidz, account1], [ONE_GWEI, -ONE_GWEI]);
 
-      const _firstKid = await cryptoKidz.kids(1);
+      const _firstKid = await cryptoKidz.getKid(1);
       expect(_firstKid.amount).to.equal(ONE_GWEI);
 
       await time.increaseTo(RELEASE_TIME);

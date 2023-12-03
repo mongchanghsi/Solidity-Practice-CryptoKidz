@@ -8,7 +8,7 @@ async function main() {
   await cryptoKidz.waitForDeployment();
 
   console.log(
-    `Deployed contract with ${await cryptoKidz.getAddress()} under ${await cryptoKidz.owner()}`
+    `Deployed contract with ${await cryptoKidz.getAddress()} under ${await cryptoKidz.getOwner()}`
   );
 
   const deploymentReceipt = cryptoKidz.deploymentTransaction();

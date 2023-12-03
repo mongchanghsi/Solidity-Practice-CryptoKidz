@@ -2,7 +2,7 @@
 pragma solidity ^0.8.9;
 
 contract CryptoKidz {
-  address public owner;
+  address private owner;
 
   constructor() {
     owner = msg.sender;
@@ -16,8 +16,8 @@ contract CryptoKidz {
     uint256 amount;
   }
 
-  mapping(address => uint256) public kidIds;
-  Kid[] public kids;
+  mapping(address => uint256) private kidIds;
+  Kid[] private kids;
 
   modifier onlyOwner() {
     require(msg.sender == owner, "Only contract owner can call");
@@ -64,6 +64,18 @@ contract CryptoKidz {
     uint256 currentKidId = kidIds[_walletAddress];
     payable(_walletAddress).transfer(kids[currentKidId].amount);
     kids[currentKidId].amount = 0;
+  }
+
+  function getOwner() public view returns (address) {
+    return owner;
+  }
+
+  function getKid(uint256 _id) public view returns (Kid memory) {
+    return kids[_id];
+  }
+
+  function getKidIdByAddress(address _address) public view returns (uint256) {
+    return kidIds[_address];
   }
 
   receive() external payable {
